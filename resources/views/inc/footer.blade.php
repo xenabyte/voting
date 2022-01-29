@@ -1,3 +1,7 @@
+                    
+                    </div><!-- / .page-content -->
+                    <!-- Main Page Content -->
+                    
                     <!-- Footer -->
                     <div class="copyright row">
                         <div class="col-md-6 text-left">

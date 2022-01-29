@@ -16,7 +16,7 @@ class Setting extends Model
 
     protected $fillable = [
         'stage',
-        'edition',
+        'edition_id',
     ];
 
     /**
@@ -26,6 +26,6 @@ class Setting extends Model
      */
     public function edition()
     {
-        return $this->belongsTo(Edition::class, 'edition');
+        return $this->belongsTo(Edition::class, 'edition_id');
     }
 }

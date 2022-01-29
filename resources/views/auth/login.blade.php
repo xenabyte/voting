@@ -39,7 +39,7 @@
 							<div class="panel-body panel-form">
 
 								<h1 class="form-title">Admin Login</h1>
-                                <form action="#" method="post">
+                                <form method="POST" action="{{ route('login') }}">
                                     @csrf
                                     <div class="form-group">
                                         <label for="">{{ __('Email Address') }}</label>
@@ -83,19 +83,17 @@
                                         </div>
                                     </div>
 
+                                    <div class="form-group form-group-btns text-center">
+                                        <div class="row no-gutters">
+                                            <div class="col-md-6">
+                                                <button type="submit" class="btn btn-block btn-lg btn-rounded btn-primary sharp-top-right">Sign In</button>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <a href="https::/incrediblevoicesmedia.com.ng" class="btn btn-block btn-lg btn-rounded btn-secondary sharp-top-left">Back</a>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </form>
-
-								
-								<div class="form-group form-group-btns text-center">
-									<div class="row no-gutters">
-										<div class="col-md-6">
-											<button type="button" class="btn btn-block btn-lg btn-rounded btn-primary sharp-top-right">Sign In</button>
-										</div>
-										<div class="col-md-6">
-											<a href="https::/incrediblevoicesmedia.com.ng" class="btn btn-block btn-lg btn-rounded btn-secondary sharp-top-left">Back</a>
-										</div>
-									</div>
-								</div>
 		
 							</div>
 	
@@ -122,3 +120,4 @@
     </body>
 
 </html> 
+
