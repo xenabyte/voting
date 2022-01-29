@@ -11,6 +11,7 @@ class Contestant extends Model
 
     protected $fillable = [
         'candidate_id',
+        'edition_id',
         'image',
         'votes',
     ];
@@ -23,5 +24,15 @@ class Contestant extends Model
     public function candidate()
     {
         return $this->belongsTo(Candidate::class, 'candidate_id');
+    }
+
+    /**
+     * Get the edition that owns the Contestant
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function edition()
+    {
+        return $this->belongsTo(Edition::class, 'edition_id');
     }
 }

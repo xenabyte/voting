@@ -122,8 +122,8 @@
 
                     <div class="widget-content">
                         <div class="widget-header">
-                            <h6 class="widget-title">Total Payment</h6>
-                            <div class="widget-stats counter">{{ number_format($edition->sum('amount', 2)) }}</div>
+                            <h6 class="widget-title">Total Payments</h6>
+                            <div class="widget-stats counter">{{ number_format($payments->sum('amount', 2)) }}</div>
                         </div>
 
                         <div class="widget-body">

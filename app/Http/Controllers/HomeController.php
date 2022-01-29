@@ -52,13 +52,13 @@ class HomeController extends Controller
         //candidates
         $candidates = Candidate::where('edition_id', $edition->id)->get();
         //payment
-        $payment = Transaction::where('edition', $edition->id)->get();
+        $payments = Transaction::where('edition_id', $edition->id)->get();
 
 
         return view('home', [
             'edition' => $edition,
             'candidates' => $candidates,
-            'payment' => $payment
+            'payments' => $payments
         ]);
     }
 
@@ -81,7 +81,16 @@ class HomeController extends Controller
 
      public function candidates()
      {
-         return view('candidates');
+         //settings
+        $setting = Setting::first();
+        $edition = $setting->edition;
+
+        //candidates
+        $candidates = Candidate::where('edition_id', $edition->id)->get();
+
+         return view('candidates', [
+             'candidates' => $candidates
+         ]);
      }
 
      /**
@@ -92,7 +101,16 @@ class HomeController extends Controller
 
      public function contestants()
      {
-         return view('contestants');
+         //settings
+        $setting = Setting::first();
+        $edition = $setting->edition;
+
+        //contestants
+        $contestants = Contestants::where('edition_id', $edition->id)->get();
+
+         return view('contestants', [
+             'contestants' => $contestants
+         ]);
      }
 
      
@@ -103,7 +121,16 @@ class HomeController extends Controller
      */
      public function payments()
      {
-         return view('payments');
+         //settings
+        $setting = Setting::first();
+        $edition = $setting->edition;
+
+        //payment
+        $payments = Transaction::where('edition_id', $edition->id)->get();
+
+         return view('payments', [
+             'payments' => $payments
+         ]);
      }
 
      

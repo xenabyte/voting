@@ -17,6 +17,7 @@ class CreateVotesTable extends Migration
             $table->id();
             $table->string('transaction_id')->nullable();
             $table->string('contestant_id')->nullable();
+            $table->string('edition_id')->nullable();
             $table->timestamps();
         });
     }

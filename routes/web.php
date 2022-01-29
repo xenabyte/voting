@@ -20,8 +20,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/registration/{category}', [App\Http\Controllers\WelcomeController::class, 'registration'])->name('registration');
 
 //pages routes
-Route::get('/editions', [App\Http\Controllers\WelcomeController::class, 'editions'])->name('editions');
-Route::get('/candidates', [App\Http\Controllers\WelcomeController::class, 'candidates'])->name('candidates');
-Route::get('/contestants', [App\Http\Controllers\WelcomeController::class, 'contestants'])->name('contestants');
-Route::get('/payments', [App\Http\Controllers\WelcomeController::class, 'payments'])->name('payments');
-Route::get('/votes', [App\Http\Controllers\WelcomeController::class, 'votes'])->name('votes');
+Route::get('/editions', [App\Http\Controllers\HomeController::class, 'editions'])->name('editions');
+Route::get('/candidates', [App\Http\Controllers\HomeController::class, 'candidates'])->name('candidates');
+Route::get('/contestants', [App\Http\Controllers\HomeController::class, 'contestants'])->name('contestants');
+Route::get('/payments', [App\Http\Controllers\HomeController::class, 'payments'])->name('payments');
+Route::get('/votes', [App\Http\Controllers\HomeController::class, 'votes'])->name('votes');

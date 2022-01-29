@@ -17,6 +17,7 @@ class CreateContestantsTable extends Migration
             $table->id();
             $table->string('candidate_id')->nullable();
             $table->string('image')->nullable();
+            $table->string('edition_id')->nullable();
             $table->string('votes')->nullable();
             $table->timestamps();
         });

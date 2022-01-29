@@ -12,6 +12,7 @@ class Vote extends Model
     protected $fillable = [
         'transaction_id',
         'contestant_id',
+        'edition_id',
         'votes',
     ];
 
@@ -33,5 +34,15 @@ class Vote extends Model
     public function contestant()
     {
         return $this->belongsTo(Contestant::class, 'contestant_id');
+    }
+
+    /**
+     * Get the edition that owns the Vote
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function edition()
+    {
+        return $this->belongsTo(Edition::class, 'edition_id');
     }
 }
