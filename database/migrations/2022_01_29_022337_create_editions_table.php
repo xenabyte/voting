@@ -18,6 +18,7 @@ class CreateEditionsTable extends Migration
             $table->string('name')->nullable();
             $table->string('tagline')->nullable();
             $table->string('year')->nullable();
+            $table->string('banner')->nullable();
             $table->string('registration_amount')->nullable();
             $table->string('amount_per_vote')->nullable();
             $table->timestamps();

@@ -9,6 +9,7 @@ class Candidate extends Model
 {
     use HasFactory;
 
+
     protected $fillable = [
         'category',
         'edition_id',
@@ -50,6 +51,14 @@ class Candidate extends Model
     public function payment()
     {
         return $this->belongsTo(Transaction::class, 'transaction_id');
+    }
+
+    public function kiddies ($query) {
+        return $query->where('category',  'kiddies');
+    }
+
+    public function adult ($query) {
+        return $query->where('category',  'adult');
     }
 
     

@@ -15,6 +15,7 @@ class Transaction extends Model
     protected $fillable = [
         'payment_for',
         'transaction_hash',
+        'edition_id',
         'amount',
         'status',
     ];
@@ -37,6 +38,16 @@ class Transaction extends Model
     public function vote_payment()
     {
         return $this->hasOne(Vote::class, 'transaction_id')->where('payment_for', $this->PAYMENT_VOTING);
+    }
+
+    /**
+     * Get the edition that owns the Transaction
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function edition()
+    {
+        return $this->belongsTo(Edition::class, 'edition_id');
     }
     
 }

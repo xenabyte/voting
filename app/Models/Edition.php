@@ -13,6 +13,7 @@ class Edition extends Model
         'name',
         'tagline',
         'year',
+        'banner',
         'registration_amount',
         'amount_per_vote'
     ];

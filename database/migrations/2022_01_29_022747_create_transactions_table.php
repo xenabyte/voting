@@ -17,6 +17,7 @@ class CreateTransactionsTable extends Migration
             $table->id();
             $table->string('payment_for')->nullable();
             $table->string('transaction_hash')->nullable();
+            $table->string('edition_id')->nullable();
             $table->string('amount')->nullable();
             $table->string('status')->nullable();
             $table->timestamps();

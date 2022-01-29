@@ -18,3 +18,10 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/registration/{category}', [App\Http\Controllers\WelcomeController::class, 'registration'])->name('registration');
+
+//pages routes
+Route::get('/editions', [App\Http\Controllers\WelcomeController::class, 'editions'])->name('editions');
+Route::get('/candidates', [App\Http\Controllers\WelcomeController::class, 'candidates'])->name('candidates');
+Route::get('/contestants', [App\Http\Controllers\WelcomeController::class, 'contestants'])->name('contestants');
+Route::get('/payments', [App\Http\Controllers\WelcomeController::class, 'payments'])->name('payments');
+Route::get('/votes', [App\Http\Controllers\WelcomeController::class, 'votes'])->name('votes');
