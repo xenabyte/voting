@@ -15,6 +15,11 @@ class CreateEditionsTable extends Migration
     {
         Schema::create('editions', function (Blueprint $table) {
             $table->id();
+            $table->string('name')->nullable();
+            $table->string('tagline')->nullable();
+            $table->string('year')->nullable();
+            $table->string('registration_amount')->nullable();
+            $table->string('amount_per_vote')->nullable();
             $table->timestamps();
         });
     }

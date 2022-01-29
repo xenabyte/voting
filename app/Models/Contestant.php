@@ -14,4 +14,14 @@ class Contestant extends Model
         'image',
         'votes',
     ];
+
+    /**
+     * Get the candidate that owns the Contestant
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function candidate()
+    {
+        return $this->belongsTo(Candidate::class, 'candidate_id');
+    }
 }

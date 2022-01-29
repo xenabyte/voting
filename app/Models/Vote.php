@@ -14,4 +14,24 @@ class Vote extends Model
         'contestant_id',
         'votes',
     ];
+
+    /**
+     * Get the transaction that owns the Vote
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function transaction()
+    {
+        return $this->belongsTo(Transaction::class, 'transaction_id');
+    }
+
+    /**
+     * Get the contestant that owns the Vote
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function contestant()
+    {
+        return $this->belongsTo(Contestant::class, 'contestant_id');
+    }
 }

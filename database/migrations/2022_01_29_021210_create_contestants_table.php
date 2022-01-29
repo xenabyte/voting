@@ -15,6 +15,9 @@ class CreateContestantsTable extends Migration
     {
         Schema::create('contestants', function (Blueprint $table) {
             $table->id();
+            $table->string('candidate_id')->nullable();
+            $table->string('image')->nullable();
+            $table->string('votes')->nullable();
             $table->timestamps();
         });
     }

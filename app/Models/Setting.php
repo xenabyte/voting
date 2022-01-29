@@ -18,4 +18,14 @@ class Setting extends Model
         'stage',
         'edition',
     ];
+
+    /**
+     * Get the edition that owns the Setting
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function edition()
+    {
+        return $this->belongsTo(Edition::class, 'edition');
+    }
 }

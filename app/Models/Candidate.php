@@ -32,5 +32,25 @@ class Candidate extends Model
         'transaction_id',
     ];
 
+    /**
+     * Get the edition that owns the Candidate
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function edition()
+    {
+        return $this->belongsTo(Edition::class, 'edition_id');
+    }
+
+    /**
+     * Get the payment that owns the Candidate
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function payment()
+    {
+        return $this->belongsTo(Transaction::class, 'transaction_id');
+    }
+
     
 }
