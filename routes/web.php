@@ -25,3 +25,7 @@ Route::get('/candidates', [App\Http\Controllers\HomeController::class, 'candidat
 Route::get('/contestants', [App\Http\Controllers\HomeController::class, 'contestants'])->name('contestants');
 Route::get('/payments', [App\Http\Controllers\HomeController::class, 'payments'])->name('payments');
 Route::get('/votes', [App\Http\Controllers\HomeController::class, 'votes'])->name('votes');
+
+//functional Routes
+//addCandidates
+Route::post('/addCandidates', [App\Http\Controllers\WelcomeController::class, 'addCandidates'])->name('addCandidates');
