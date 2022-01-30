@@ -27,4 +27,25 @@ class Edition extends Model
     {
         return $this->hasMany(Candidate::class);
     }
+
+    /**
+     * Get all of the transactions for the Edition
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
+    }
+
+    public static function getValidationRule () {
+        return [
+            'name' => 'required|max:255',
+            'tagline' => 'required|max:255',
+            'year' => 'required|max:255',
+            'registration_amount' => 'required|max:255',
+            'amount_per_vote' => 'required|max: 255',
+            'banner' => 'required|file|mimes:pdf,jpg,png,gif,jpeg|max:4096',
+        ];
+    }
 }

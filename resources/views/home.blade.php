@@ -17,12 +17,12 @@
 
     <div class="col-md-8">
 
-        <div class="card card-promotion-wide-3 mt-24" style="background-image: url({{asset('assets/images/dashboards/metrica.jpg')}})">
-            <div class="card-overlay" style="background-color: #363679;"></div>
+        <div class="card card-promotion-wide-3 mt-24" style="background-image: url({{ $setting->edition->banner }})">
+            <div class="card-overlay" style="background-color: #000003ef;"></div>
             <!-- <img src="../../assets/backgrounds/cosmic-timetraveler-LgrGHYZzBSk-unsplash.jpg" alt=""> -->
             <div class="card-body text-white">
                 <span class="badge badge-danger">Active Edition</span>
-                <h3 class="card-heading mt-3">{{ $edition->name .' '. $edition->year }} - {{ $setting->stage }} Stage</h3>
+                <h3 class="card-heading mt-3">{{ $edition->name .' '. $edition->year }} - {{ $setting->stage }} STAGE</h3>
                 <p class="card-text">
                     {{ $edition->tagline }}
                 </p>
@@ -33,25 +33,52 @@
     </div>
 
     <div class="col-md-4">
+        <div class="panel panel-light">
+            <div class="panel-header">
+                <h1 class="panel-title">All Editions</h1>
+            </div>
+            <div class="panel-body p-0">
+												
+                <ul class="list-group channels-list only-separator-borders">
+                    @foreach($allEditions as $singleEdition)
+                        <li class="list-group-item">
+                            <div class="item-col item-img">
+                                <img src="{{ $singleEdition->banner }}" class="img-fluid">
+                            </div>
+                            <div class="item-col item-descriptions">
+                                <a href="#" class="item-title">{{ $singleEdition->name }}</a>
+                                <small>Year: {{ $singleEdition->year }}</small>
+                                <small>Tagline: {{ $singleEdition->tagline }}</small>
+                            </div>
+                            <div class="item-col">
+                                @if($singleEdition->id != $setting->edition_id)
+                                <a href="{{ url('/activateEdition')}}/{{ $singleEdition->id }}" class="btn btn-outline-dark btn-sm">
+                                    Make Edition Active
+                                </a>
+                                @else
+                                    <h5>Active Edition</h5>
+                                @endif
+                            </div>
+                            <div class="dropdown ml-auto">
+                                <button class="btn dropdown-toggle dropdown-nocaret" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="#"><i class="fas fa-i-cursor"></i> Edit</a>
+                                    <a class="dropdown-item" href="#"><i class="fas fa-trash"></i> Remove</a>
+                                </div>
+                            </div>
+                        </li>
+                    @endforeach
+                </ul>
 
-        <div class="card card-promotion-wide-3 mt-24" style="background-image: url('../../assets/backgrounds/patrick-tomasso-5hvn-2WW6rY-unsplash-h200.jpg'); min-height: 163px; ">
-            <div class="card-overlay" style="background-color: #793636;"></div>
-            <!-- <img src="../../assets/backgrounds/cosmic-timetraveler-LgrGHYZzBSk-unsplash.jpg" alt=""> -->
-            <div class="card-body text-white p-0">
-                <p class="card-text m-0">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                </p>
+            </div>
+            <div class="panel-footer">
+                <div class="panel-toolbar">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createEditionModal">Create New Edition</button>
+                </div>
             </div>
         </div>
-
-        <div class="card card-promotion-wide-3 mt-24" style="background-image: url('../../assets/backgrounds/sharon-mccutcheon-62vi3TG5EDg-unsplash-h200.jpg'); min-height: 163px; ">
-            <div class="card-overlay"></div>
-            <!-- <img src="../../assets/backgrounds/cosmic-timetraveler-LgrGHYZzBSk-unsplash.jpg" alt=""> -->
-            <div class="card-body text-white p-0">
-                <h3 class="card-heading m-0">Environment is in danger</h3>
-            </div>
-        </div>
-
     </div>  
 </div>
 
@@ -175,6 +202,78 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-light" data-dismiss="modal">No</button>
                     <button type="submit" class="btn btn-success">OK</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="createEditionModal">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Create Edition</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="#333333" viewBox="0 0 24 24" width="24" height="24"><path d="M16.24 14.83a1 1 0 0 1-1.41 1.41L12 13.41l-2.83 2.83a1 1 0 0 1-1.41-1.41L10.59 12 7.76 9.17a1 1 0 0 1 1.41-1.41L12 10.59l2.83-2.83a1 1 0 0 1 1.41 1.41L13.41 12l2.83 2.83z"/></svg>
+                </button>
+            </div>
+            <form action="{{ route('createEdition') }}" method="post" enctype="multipart/form-data">
+                @csrf
+                <div class="modal-body">
+                    <p class="text-center">You are about to create a new edition.</p>
+                    <hr>
+                    <div class="form-group">
+                        <label for="">Edition Name</label>
+                        <div class="input-group input-group-squared">
+                            <input type="text" name="name" class="form-control" placeholder="Enter edition name here...">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="">Edition Year</label>
+                        <div class="input-group input-group-squared">
+                            <input type="year" name="year" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="">Edition Tagline</label>
+                        <div class="input-group input-group-squared">
+                            <input type="text" name="tagline" class="form-control" placeholder="Enter edition tagline here...">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="">Registration Amount</label>
+                        <div class="input-group input-group-squared">
+                            <input type="text" name="registration_amount" class="form-control" placeholder="Enter edition registration amount here...">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="">Amount Per Vote</label>
+                        <div class="input-group input-group-squared">
+                            <input type="text" name="amount_per_vote" class="form-control" placeholder="Enter edition vote amount here...">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <code class="col-md-12 pt-2">Maximum file size="3MB"</code>
+                        <div class="col-md-12 mt-4">
+                            <input type="file" name="banner" class="dropify" data-max-file-size="3M"  data-allowed-file-extensions="jpg png" data-default-file="{{asset('img/placeholder.jpg')}}">
+                        </div>
+                    </div>
+                    
+                    <br><hr>
+                    <div class="custom-control custom-checkbox d-block">
+                        <input type="checkbox" name="make_active" value="active" class="custom-control-input" id="customCheck1">
+                        <label class="custom-control-label" for="customCheck1">Make this edition active</label>
+                    </div>
+                    <hr><br>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light" data-dismiss="modal">No</button>
+                    <button type="submit" class="btn btn-success">Submit</button>
                 </div>
             </form>
         </div>

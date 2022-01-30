@@ -29,4 +29,6 @@ class Setting extends Model
     {
         return $this->belongsTo(Edition::class, 'edition_id');
     }
+
+    
 }

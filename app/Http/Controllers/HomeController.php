@@ -49,6 +49,7 @@ class HomeController extends Controller
         //settings
         $setting = Setting::first();
         $edition = $setting->edition;
+        $allEditions = Edition::All();
 
         //candidates
         $candidates = Candidate::where('edition_id', $edition->id)->get();
@@ -60,7 +61,8 @@ class HomeController extends Controller
             'setting' => $setting,
             'edition' => $edition,
             'candidates' => $candidates,
-            'payments' => $payments
+            'payments' => $payments,
+            'allEditions' => $allEditions,
         ]);
     }
 
@@ -167,6 +169,65 @@ class HomeController extends Controller
             alert()->info('Payment successful', 'Good Job')->persistent('Close'); 
             return redirect()->back();
         }
+        alert()->error('Something went wrong', 'Opps')->persistent('Close'); 
+        return redirect()->back();
+    }
+
+    /**
+     * Create pageantry Edition.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function createEdition(Request $request)
+    {
+        $setting = Setting::first();
+        try{
+            //$this->validate($request, Edition::getValidationRule());
+        } catch (Exception $e) {
+            Log::info($e);
+            alert()->error($e, 'Opps')->persistent('Close');
+            return redirect()->back();
+        }
+
+        //create Edition object
+        $imageUrl = 'uploads/banner/'.'banner_'.time().$request->file('banner')->getClientOriginalName(); 
+        $image = $request->file('banner')->move('uploads/banner', $imageUrl);
+        $newEdition = ([
+            'name' => $request->name,
+            'year' => $request->year,
+            'tagline' => $request->tagline,
+            'registration_amount' => $request->registration_amount,
+            'amount_per_vote' => $request->amount_per_vote,
+            'banner' => $imageUrl,
+        ]);
+
+
+        if($createEdition = Edition::create($newEdition)){
+            //make active (optional)
+            if(!empty($request->make_active)){
+                $this->makeEditionActive($createEdition->id);
+            }
+            alert()->info('Edition Created', 'Good Job')->persistent('Close'); 
+            return redirect()->back();
+        }
+        alert()->error('Something went wrong', 'Opps')->persistent('Close'); 
+        return redirect()->back();
+    }
+
+     /**
+     * Activate Edition
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function activateEdition($id){
+
+        $activateEdition = $this->makeEditionActive($id);
+        
+        if($activateEdition){
+            alert()->info('Edition Activated', 'Good Job')->persistent('Close'); 
+            return redirect()->back();
+        }
+
         alert()->error('Something went wrong', 'Opps')->persistent('Close'); 
         return redirect()->back();
     }

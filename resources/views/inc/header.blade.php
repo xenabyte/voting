@@ -21,7 +21,8 @@
         <link href="{{asset('webfiles/css/fonts.googleapis.com/css2df2a.css?family=Dosis:wght@200;300;400;500;523;600;700;800&amp;family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap')}}" rel="stylesheet">
 
         <link rel="stylesheet" href="{{asset('webfiles/layout-1/css/app8bb9.css?v=545">')}}">
-        <link rel="stylesheet" href="{{asset('css/plyr.css') }}">
+        <link rel="stylesheet" href="{{asset('webfiles/layout-1/css/app.css')}}">
+		<link rel="stylesheet" href="{{asset('webfiles/vendor/dropify/css/dropify.css') }}">
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 

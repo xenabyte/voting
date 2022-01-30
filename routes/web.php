@@ -35,4 +35,8 @@ Route::post('/updateStage', [App\Http\Controllers\HomeController::class, 'update
 Route::get('/verifyPayment', [App\Http\Controllers\HomeController::class, 'handleGatewayCallback']);
 //webhook to verifyPayment
 Route::get('/paystackWebhook', [App\Http\Controllers\HomeController::class, 'paystackWebhook']);
+//createEdition
+Route::post('/createEdition', [App\Http\Controllers\HomeController::class, 'createEdition'])->name('createEdition');
+//activateEdition
+Route::get('/activateEdition/{id}', [App\Http\Controllers\HomeController::class, 'activateEdition'])->name('activateEdition');
 

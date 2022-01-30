@@ -96,4 +96,13 @@ class Controller extends BaseController
        
        return false;
     }
+
+    public function makeEditionActive($id){
+        $setting = Setting::first();
+        $setting->edition_id = $id;
+       if($setting->save()){
+            return true;
+       }
+       return false;
+    }
 }
