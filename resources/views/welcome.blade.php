@@ -420,7 +420,6 @@
 																	<input type="hidden" name="reference" value="{{ Paystack::genTranxRef() }}"> {{-- required --}}
 																	<input type="hidden" name="key" value="{{ config('paystack.secretKey') }}"> {{-- required --}}
 																	<input type="hidden" name="metadata" value="{{ json_encode($array = [
-																			'email' => $category == 'kiddies' ? $newCandidate['guardian_email'] : $newCandidate['email'],
 																			'category' => $category,
 																			'edition_id' => $newCandidate['edition_id'],
 																			'fullname' => $newCandidate['fullname'],
@@ -439,9 +438,10 @@
 																			'skills' => $newCandidate['skills'],
 																			'languages'=> $newCandidate['languages'],
 																			'occupation'=> $newCandidate['occupation'],
-																			'image' => $newCandidate['image']
+																			'image' => $newCandidate['image'],
+																			'payment_for'=> 'Registration',
 																		]) }}" > {{-- For other necessary things you want to add to your payload. it is optional though --}}
-																	<input type="hidden" n	ame="amount" value="{{ $category == 'kiddies' ? ($edition->registration_amount - 500)*100 : $edition->registration_amount * 100 }}">
+																	<input type="hidden" name="amount" value="{{ $category == 'kiddies' ? ($edition->registration_amount - 500)*100 : $edition->registration_amount * 100 }}">
 																	<input type="hidden" name="email" value="{{ $category == "kiddies" ? $newCandidate['guardian_email'] : $newCandidate['email'] }}">
 
 																	<div class="mx-auto" style="max-width: 500px;">

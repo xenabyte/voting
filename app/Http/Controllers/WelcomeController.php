@@ -37,23 +37,7 @@ class WelcomeController extends Controller
      */
     public function registration($category){
 
-        //get active editions
-        $setting = Setting::first();
-        $edition = $setting->edition;
-
-        switch ($setting->stage){
-            case Setting::STAGE_REGISTRATION:
-                return view('welcome', [
-                    'category' => $category,
-                    'edition' => $edition,
-                ]);
-                break;
-            default:
-                return view('welcome', [
-                    'category' => $category,
-                    'edition' => $edition,
-                ]);
-        }
+        return $this->viewLanding($category);
     }
     
      /**
@@ -119,45 +103,20 @@ class WelcomeController extends Controller
     {
         $paymentDetails = Paystack::getPaymentData();
 
+        //get active editions
+        $setting = Setting::first();
+        $edition = $setting->edition;
+        $category = $paymentDetails['data']['metadata']['category'];
+
         if($paymentDetails['status'] == true){
-            $student_id = $paymentDetails['data']['metadata']['student_id'];
-            $student_email = $paymentDetails['data']['customer']['email'];
-            $payment_reference_id = $paymentDetails['data']['reference'];
-            $amountPaid = $paymentDetails['data']['amount']/100;
-
-            //subtract charges
-
-
-            $studentData = Student::find($student_id);
-            $deposits = Deposit::with(['student', 'admin', 'pay_method'])->where('student_id', $studentData->id)->get();
-            $paymentMethod = PaymentMethod::all();
-
-            if(Deposit::where('payment_reference', $payment_reference_id)->where('status', Status::getStatusId(Status::STATUS_SUCCESS))->first()){
-                alert()->info('Payment already Processed', 'success')->persistent('Close');
-                return view('student.deposit', [
-                    'deposits' => $deposits,
-                    'payment_methods' => $paymentMethod
-                ]);
+            $processPayment = $this->verifyPayment($paymentDetails);
+            if($processPayment){
+                alert()->info('Payment successful', 'Good Job')->persistent('Close');
+                return $this->viewLanding($category);
             }
 
-            $deposit = Deposit::with(['student'])->where('payment_reference', $payment_reference_id)->where('student_id', $student_id)->where('status', Status::getStatusId(Status::STATUS_PENDING))->first();
-
-            //get Student
-            $studentBalance = $studentData->wallet;
-            $newBalance = $studentBalance + $deposit->amount;
-            $studentData->wallet = $newBalance;
-
-            $deposit->status = Status::getStatusId(Status::STATUS_SUCCESS);
-
-            //send mail
-            if($deposit->save() && $studentData->save()){
-                alert()->success('Payment Successful', 'Success')->persistent('Close');
-                return view('student.deposit', [
-                    'deposits' => $deposits,
-                    'payment_methods' => $paymentMethod
-                ]);
-            }
-
+            alert()->info('Payment already Processed', 'Success')->persistent('Close');
+            return $this->viewLanding($category);
         }
 
     }
