@@ -11,8 +11,9 @@ class Setting extends Model
 
     const STAGE_REGISTRATION = 'REGISTRATION';
     const STAGE_AUDITION = 'AUDITION';
-    const STAGE_CONTEST_PROCESS = 'CONTEST_PROCESS';
+    const STAGE_CONTEST_PROCESS = 'CONTEST PROCESS';
     const STAGE_VOTING = 'VOTING';
+    const STAGE_COMPLETE = 'COMPLETE';
 
     protected $fillable = [
         'stage',

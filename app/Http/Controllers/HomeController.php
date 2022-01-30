@@ -57,6 +57,7 @@ class HomeController extends Controller
 
 
         return view('home', [
+            'setting' => $setting,
             'edition' => $edition,
             'candidates' => $candidates,
             'payments' => $payments
@@ -89,10 +90,11 @@ class HomeController extends Controller
         //candidates
         $candidates = Candidate::where('edition_id', $edition->id)->get();
 
-         return view('candidates', [
-             'candidates' => $candidates,
-             'edition' => $edition,
-         ]);
+        return view('candidates', [
+            'setting' => $setting,
+            'candidates' => $candidates,
+            'edition' => $edition,
+        ]);
      }
 
      /**
@@ -110,10 +112,11 @@ class HomeController extends Controller
         //contestants
         $contestants = Contestant::where('edition_id', $edition->id)->get();
 
-         return view('contestants', [
-             'contestants' => $contestants,
-             'edition' => $edition,
-         ]);
+        return view('contestants', [
+            'setting' => $setting,
+            'contestants' => $contestants,
+            'edition' => $edition,
+        ]);
      }
 
      
@@ -131,10 +134,11 @@ class HomeController extends Controller
         //payment
         $payments = Transaction::where('edition_id', $edition->id)->get();
 
-         return view('payments', [
-             'payments' => $payments,
-             'edition' => $edition,
-         ]);
+        return view('payments', [
+            'setting' => $setting,
+            'payments' => $payments,
+            'edition' => $edition,
+        ]);
      }
 
      
@@ -147,4 +151,23 @@ class HomeController extends Controller
      {
          return view('votes');
      }
+
+      /**
+     * Update pageantry stage.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function updateStage(Request $request)
+    {
+        $stage = $request->stage;
+        $setting = Setting::first();
+        $setting->stage = $stage;
+
+        if($setting->save()){
+            alert()->info('Payment successful', 'Good Job')->persistent('Close'); 
+            return redirect()->back();
+        }
+        alert()->error('Something went wrong', 'Opps')->persistent('Close'); 
+        return redirect()->back();
+    }
 }

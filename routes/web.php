@@ -29,3 +29,10 @@ Route::get('/votes', [App\Http\Controllers\HomeController::class, 'votes'])->nam
 //functional Routes
 //addCandidates
 Route::post('/addCandidates', [App\Http\Controllers\WelcomeController::class, 'addCandidates'])->name('addCandidates');
+//updateStage
+Route::post('/updateStage', [App\Http\Controllers\HomeController::class, 'updateStage'])->name('updateStage');
+//verifyPayment
+Route::get('/verifyPayment', [App\Http\Controllers\HomeController::class, 'handleGatewayCallback']);
+//webhook to verifyPayment
+Route::get('/paystackWebhook', [App\Http\Controllers\HomeController::class, 'paystackWebhook']);
+

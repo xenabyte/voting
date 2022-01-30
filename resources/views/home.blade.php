@@ -22,11 +22,11 @@
             <!-- <img src="../../assets/backgrounds/cosmic-timetraveler-LgrGHYZzBSk-unsplash.jpg" alt=""> -->
             <div class="card-body text-white">
                 <span class="badge badge-danger">Active Edition</span>
-                <h3 class="card-heading mt-3">{{ $edition->name .' '. $edition->year }}</h3>
+                <h3 class="card-heading mt-3">{{ $edition->name .' '. $edition->year }} - {{ $setting->stage }} Stage</h3>
                 <p class="card-text">
                     {{ $edition->tagline }}
                 </p>
-                <a href="#" class="btn btn-sm btn-light px-5 btn-uppercase">Change Stage</a>
+                <a href="#" class="btn btn-sm btn-light px-5 btn-uppercase" data-toggle="modal" data-target="#changeModal">Change Stage</a>
             </div>
         </div>
         
@@ -142,6 +142,44 @@
     </div>
 
 </div><!-- /  Report - Dark -->
+
+<div class="modal fade" tabindex="-1" role="dialog" id="changeModal">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Change Stage</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="#333333" viewBox="0 0 24 24" width="24" height="24"><path d="M16.24 14.83a1 1 0 0 1-1.41 1.41L12 13.41l-2.83 2.83a1 1 0 0 1-1.41-1.41L10.59 12 7.76 9.17a1 1 0 0 1 1.41-1.41L12 10.59l2.83-2.83a1 1 0 0 1 1.41 1.41L13.41 12l2.83 2.83z"/></svg>
+                </button>
+            </div>
+            <form action="{{ route('updateStage') }}" method="post">
+                @csrf
+                <div class="modal-body">
+                    <p class="text-center">Are you sure you want to change pagentry stage?</p>
+                    <p class="text-center">Pagentry is currently in <strong>{{ $setting->stage }}</strong> stage.</p>
+                    <div class="form-group">
+                        <label for="">Stage</label>
+                        <div class="input-group input-group-squared">
+                            <select name="stage" class="form-control">
+                                <option value="" selected="selected" >- Select Stage -</option>
+                                <option value='REGISTRATION'>REGISTRATION</option>
+                                <option value='AUDITION'>AUDITION</option>
+                                <option value='CONTEST PROCESS'>CONTEST PROCESS</option>
+                                <option value='VOTING'>VOTING</option>
+                                <option value='COMPLETE'>COMPLETE</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light" data-dismiss="modal">No</button>
+                    <button type="submit" class="btn btn-success">OK</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 
 @include('inc/footer')
