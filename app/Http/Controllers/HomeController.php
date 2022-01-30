@@ -89,7 +89,8 @@ class HomeController extends Controller
         $candidates = Candidate::where('edition_id', $edition->id)->get();
 
          return view('candidates', [
-             'candidates' => $candidates
+             'candidates' => $candidates,
+             'edition' => $edition,
          ]);
      }
 
@@ -106,10 +107,11 @@ class HomeController extends Controller
         $edition = $setting->edition;
 
         //contestants
-        $contestants = Contestants::where('edition_id', $edition->id)->get();
+        $contestants = Contestant::where('edition_id', $edition->id)->get();
 
          return view('contestants', [
-             'contestants' => $contestants
+             'contestants' => $contestants,
+             'edition' => $edition,
          ]);
      }
 
@@ -129,7 +131,8 @@ class HomeController extends Controller
         $payments = Transaction::where('edition_id', $edition->id)->get();
 
          return view('payments', [
-             'payments' => $payments
+             'payments' => $payments,
+             'edition' => $edition,
          ]);
      }
 
