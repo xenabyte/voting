@@ -12,6 +12,7 @@ class Contestant extends Model
     protected $fillable = [
         'candidate_id',
         'edition_id',
+        'status',
         'image',
         'votes',
     ];

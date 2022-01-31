@@ -45,7 +45,7 @@
 	
 						<div class="col-md-2">
 
-							<div class="panel-body panel-image" style="background-image: url('../../assets/auth/6047404.svg');">
+							<div class="panel-body panel-image" style="background: black;">
 		
 							</div>
 	
@@ -154,7 +154,7 @@
 																		<div class="form-group">
 																			<label for="">State of Origin</label>
 																			<div class="input-group input-group-squared">
-																				<select name="state" id="state_of_origin" class="form-control">
+																				<select name="state_of_origin" id="state_of_origin" class="form-control">
 																					<option value="" selected="selected" >- Select State of Origin -</option>
 																					<option value='Abia'>Abia</option>
 																					<option value='Adamawa'>Adamawa</option>
@@ -290,7 +290,7 @@
 																		</div>
 
 																		<div class="form-group">
-																			<label for="">Aquired Skill(s)</label>
+																			<label for="">Acquired Skill(s)</label>
 																			<div class="input-group input-group-squared">
 																				<input type="text" name="skills" class="form-control" placeholder="Enter your skill(s) separated by comma (,) here...">
 																			</div>

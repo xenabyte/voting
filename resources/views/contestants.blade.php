@@ -44,7 +44,7 @@
                 <h4 class="mb-3">Adult Contestants</h4>  
                 <div class="row">
                     @foreach($contestants as $contestant)
-                        @if($contestant->candidate == 'adult')
+                        @if($contestant->candidate->category == 'adult')
                             <div class="col-md-4">
 
                                 <div class="card mt-24 card-user-profile-2">
@@ -102,7 +102,7 @@
                 <h4 class="mb-3">Kid Contestants</h4>
                 <div class="row">
                     @foreach($contestants as $contestant)
-                        @if($contestant->candidate == 'kiddies')
+                        @if($contestant->candidate->category == 'kiddies')
                             <div class="col-md-4">
 
                                 <div class="card mt-24 card-user-profile-2">

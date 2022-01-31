@@ -32,13 +32,15 @@ Route::post('/addCandidates', [App\Http\Controllers\WelcomeController::class, 'a
 //updateStage
 Route::post('/updateStage', [App\Http\Controllers\HomeController::class, 'updateStage'])->name('updateStage');
 //verifyPayment
-Route::get('/verifyPayment', [App\Http\Controllers\HomeController::class, 'handleGatewayCallback']);
+Route::get('/verifyPayment', [App\Http\Controllers\WelcomeController::class, 'verifyPayment']);
 //webhook to verifyPayment
-Route::get('/paystackWebhook', [App\Http\Controllers\HomeController::class, 'paystackWebhook']);
+Route::post('/paystackWebhook', [App\Http\Controllers\WelcomeController::class, 'paystackWebhook']);
 //createEdition
 Route::post('/createEdition', [App\Http\Controllers\HomeController::class, 'createEdition'])->name('createEdition');
 //activateEdition
 Route::get('/activateEdition/{id}', [App\Http\Controllers\HomeController::class, 'activateEdition'])->name('activateEdition');
 //editEdition
 Route::post('/editEdition', [App\Http\Controllers\HomeController::class, 'editEdition'])->name('editEdition');
+//makeContestant
+Route::post('/makeContestant', [App\Http\Controllers\HomeController::class, 'makeContestant'])->name('makeContestant');
 

@@ -46,20 +46,21 @@ class Controller extends BaseController
         }
     }
 
-    public function verifyPayment($paymentDetails){
+    public function processPayment($paymentDetails){
          //get active editions
         $reference = $paymentDetails['data']['reference'];
+        //dd($paymentDetails);
         //check if payment have been added
         if(Transaction::where('transaction_hash', $reference)->where('status', 1)->first()){
             return false;
         }
         //Create new transaction
         $transactionId = Transaction::create([
-            'payment_for' => $paymentFor,
+            'payment_for' => $paymentDetails['data']['metadata']['payment_for'],
             'transaction_hash' => $reference,
-            'amount' => $amount,
+            'amount' => $paymentDetails['data']['amount']/100,
             'status' => 1,
-            'edition_id' => $editionId,
+            'edition_id' => $paymentDetails['data']['metadata']['edition_id'],
         ])->id;
 
         if($paymentDetails['data']['metadata']['payment_for'] == "Registration"){

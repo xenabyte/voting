@@ -36,6 +36,9 @@ class WelcomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function registration($category){
+        if($category != 'kiddies' || $category == 'adult'){
+            return $this->viewLanding('adult');
+        }
 
         return $this->viewLanding($category);
     }
@@ -99,7 +102,7 @@ class WelcomeController extends Controller
 
 
     //verify payment with card
-    public function handleGatewayCallback()
+    public function verifyPayment()
     {
         $paymentDetails = Paystack::getPaymentData();
 
@@ -109,7 +112,7 @@ class WelcomeController extends Controller
         $category = $paymentDetails['data']['metadata']['category'];
 
         if($paymentDetails['status'] == true){
-            $processPayment = $this->verifyPayment($paymentDetails);
+            $processPayment = $this->processPayment($paymentDetails);
             if($processPayment){
                 alert()->info('Payment successful', 'Good Job')->persistent('Close');
                 return $this->viewLanding($category);

@@ -101,7 +101,7 @@
 	
 						<div class="col-md-6">
 
-							<div class="panel-body panel-image" style="background-image: url('../../assets/auth/tim-bennett-OwvRB-M3GwE-unsplash-h500.jpg');">
+							<div class="panel-body panel-image" style="background-image: url({{asset('img/iv22.jpeg')}});">
 		
 							</div>
 	

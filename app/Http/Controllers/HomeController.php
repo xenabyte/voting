@@ -112,7 +112,8 @@ class HomeController extends Controller
         $edition = $setting->edition;
 
         //contestants
-        $contestants = Contestant::where('edition_id', $edition->id)->get();
+        $contestants = Contestant::with('candidate', 'edition')->where('edition_id', $edition->id)->get();
+        Log::info($contestants);
 
         return view('contestants', [
             'setting' => $setting,
@@ -265,5 +266,38 @@ class HomeController extends Controller
         alert()->error('Something went wrong', 'Opps')->persistent('Close'); 
         return redirect()->back();
 
+    }
+
+     /**
+     * make Contestant Edition
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function makeContestant(Request $request)
+    {
+        $setting = Setting::first();
+        //check if contestant exist
+        if($contestant = Contestant::where('candidate_id', $request->candidate_id)->first()){
+            alert()->error('Candidate is already a contestant', 'Oops')->persistent('Close'); 
+            return redirect()->back();
+        }
+
+        //create contestant object
+        $imageUrl = 'uploads/contestant/'.'contestant'.time().$request->file('image')->getClientOriginalName(); 
+        $image = $request->file('image')->move('uploads/image', $imageUrl);
+        $newContestant = ([
+            'candidate_id' => $request->candidate_id,
+            'edition_id' => $request->edition_id,
+            'status' => 1,
+            'image' => $imageUrl,
+        ]);
+
+
+        if($createContestant = Contestant::create($newContestant)){
+            alert()->info('Contestant Created', 'Good Job')->persistent('Close'); 
+            return redirect()->back();
+        }
+        alert()->error('Something went wrong', 'Opps')->persistent('Close'); 
+        return redirect()->back();
     }
 }
