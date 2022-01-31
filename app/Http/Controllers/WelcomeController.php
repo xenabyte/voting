@@ -132,6 +132,19 @@ class WelcomeController extends Controller
 
     }
 
+    public function paystackWebhook(Request $request){
+        try {
+            $webhookData = $request->all();
+            $event = $webhookData['event'];
+            if($event == "charge.success"){
+                $processPayment = $this->processPayment($paymentDetails);
+                return $processPayment;
+            }
+            
+        }catch (ValidationException $e) {
+            Log::error($e->getMessage());
+        }
+    }
 
     
 }
