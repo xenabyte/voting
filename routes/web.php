@@ -13,7 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Auth::routes();
+Auth::routes([
+    'register' => false,
+]);
+
+Route::get('/', [App\Http\Controllers\WelcomeController::class, 'index'])->name('index');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
@@ -43,4 +47,6 @@ Route::get('/activateEdition/{id}', [App\Http\Controllers\HomeController::class,
 Route::post('/editEdition', [App\Http\Controllers\HomeController::class, 'editEdition'])->name('editEdition');
 //makeContestant
 Route::post('/makeContestant', [App\Http\Controllers\HomeController::class, 'makeContestant'])->name('makeContestant');
+//disqualifyContestant
+Route::post('/disqualifyContestant', [App\Http\Controllers\HomeController::class, 'disqualifyContestant'])->name('disqualifyContestant');
 

@@ -54,7 +54,7 @@
                                                 <span>View Candidate</span>
                                             </a>
                                             <a href="#" class="dropdown-item" data-toggle="modal" data-target="#makeAdultContestant">
-                                                <i class="fas fa-check"></i>
+                                                <i class="fas fa-check text-success"></i>
                                                 <span>Make Contestant</span>
                                             </a>
                                         </div>
@@ -203,7 +203,7 @@
 													<span>View Candidate</span>
 												</a>
 												<a href="#" class="dropdown-item" data-toggle="modal" data-target="#makeContestant">
-													<i class="fas fa-check"></i>
+													<i class="fas fa-check text-success"></i>
 													<span>Make Contestant</span>
 												</a>
 											</div>
@@ -231,7 +231,7 @@
                                 <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title">Candidates 0{{ $kidCandidate->id}}</h5>
+                                            <h5 class="modal-title">Candidate 0{{ $kidCandidate->id}}</h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="#333333" viewBox="0 0 24 24" width="24" height="24"><path d="M16.24 14.83a1 1 0 0 1-1.41 1.41L12 13.41l-2.83 2.83a1 1 0 0 1-1.41-1.41L10.59 12 7.76 9.17a1 1 0 0 1 1.41-1.41L12 10.59l2.83-2.83a1 1 0 0 1 1.41 1.41L13.41 12l2.83 2.83z"/></svg>
                                             </button>
@@ -286,7 +286,7 @@
                                 <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title">Candidates 0{{ $kidCandidate->id}}</h5>
+                                            <h5 class="modal-title">Candidate 0{{ $kidCandidate->id}}</h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="#333333" viewBox="0 0 24 24" width="24" height="24"><path d="M16.24 14.83a1 1 0 0 1-1.41 1.41L12 13.41l-2.83 2.83a1 1 0 0 1-1.41-1.41L10.59 12 7.76 9.17a1 1 0 0 1 1.41-1.41L12 10.59l2.83-2.83a1 1 0 0 1 1.41 1.41L13.41 12l2.83 2.83z"/></svg>
                                             </button>

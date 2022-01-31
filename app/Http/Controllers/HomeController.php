@@ -113,7 +113,6 @@ class HomeController extends Controller
 
         //contestants
         $contestants = Contestant::with('candidate', 'edition')->where('edition_id', $edition->id)->get();
-        Log::info($contestants);
 
         return view('contestants', [
             'setting' => $setting,
@@ -167,7 +166,7 @@ class HomeController extends Controller
         $setting->stage = $stage;
 
         if($setting->save()){
-            alert()->info('Payment successful', 'Good Job')->persistent('Close'); 
+            alert()->success('Stage updated', 'Good Job')->persistent('Close'); 
             return redirect()->back();
         }
         alert()->error('Something went wrong', 'Opps')->persistent('Close'); 
@@ -185,7 +184,6 @@ class HomeController extends Controller
         try{
             //$this->validate($request, Edition::getValidationRule());
         } catch (Exception $e) {
-            Log::info($e);
             alert()->error($e, 'Opps')->persistent('Close');
             return redirect()->back();
         }
@@ -208,7 +206,7 @@ class HomeController extends Controller
             if(!empty($request->make_active)){
                 $this->makeEditionActive($createEdition->id);
             }
-            alert()->info('Edition Created', 'Good Job')->persistent('Close'); 
+            alert()->success('Edition Created', 'Good Job')->persistent('Close'); 
             return redirect()->back();
         }
         alert()->error('Something went wrong', 'Opps')->persistent('Close'); 
@@ -225,7 +223,7 @@ class HomeController extends Controller
         $activateEdition = $this->makeEditionActive($id);
         
         if($activateEdition){
-            alert()->info('Edition Activated', 'Good Job')->persistent('Close'); 
+            alert()->success('Edition Activated', 'Good Job')->persistent('Close'); 
             return redirect()->back();
         }
 
@@ -259,7 +257,7 @@ class HomeController extends Controller
         }
 
         if($edition->save()){
-            alert()->info('Changes Saved', 'Good Job')->persistent('Close'); 
+            alert()->success('Changes Saved', 'Good Job')->persistent('Close'); 
             return redirect()->back();
         }
 
@@ -284,7 +282,7 @@ class HomeController extends Controller
 
         //create contestant object
         $imageUrl = 'uploads/contestant/'.'contestant'.time().$request->file('image')->getClientOriginalName(); 
-        $image = $request->file('image')->move('uploads/image', $imageUrl);
+        $image = $request->file('image')->move('uploads/contestant', $imageUrl);
         $newContestant = ([
             'candidate_id' => $request->candidate_id,
             'edition_id' => $request->edition_id,
@@ -294,7 +292,31 @@ class HomeController extends Controller
 
 
         if($createContestant = Contestant::create($newContestant)){
-            alert()->info('Contestant Created', 'Good Job')->persistent('Close'); 
+            alert()->success('Contestant Created', 'Good Job')->persistent('Close'); 
+            return redirect()->back();
+        }
+        alert()->error('Something went wrong', 'Opps')->persistent('Close'); 
+        return redirect()->back();
+    }
+
+     /**
+     * make Contestant Edition
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function disqualifyContestant(Request $request)
+    {
+        $setting = Setting::first();
+        //check if contestant exist
+        if(!$contestant = Contestant::where('id', $request->contestant_id)->first()){
+            alert()->error('contestant doesn\'t exist', 'Oops')->persistent('Close'); 
+            return redirect()->back();
+        }
+
+        //disqualify contestant object
+       $contestant->status = 0;
+        if($contestant->save()){
+            alert()->success('Contestant Disqualified', 'Good Job')->persistent('Close'); 
             return redirect()->back();
         }
         alert()->error('Something went wrong', 'Opps')->persistent('Close'); 

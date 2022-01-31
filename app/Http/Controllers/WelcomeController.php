@@ -29,6 +29,14 @@ use Alert;
 
 class WelcomeController extends Controller
 {
+      /**
+     * Show Landing page
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function index(){
+        return view('index');
+    }
 
      /**
      * Show registration page
@@ -36,8 +44,8 @@ class WelcomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function registration($category){
-        if($category != 'kiddies' || $category == 'adult'){
-            return $this->viewLanding('adult');
+        if($category != 'kiddies' && $category != 'adult'){
+            return view('error');
         }
 
         return $this->viewLanding($category);
@@ -69,8 +77,8 @@ class WelcomeController extends Controller
         }
 
         //register candidates
-        $imageUrl = 'uploads/images/'.$request->nickname.$request->file('image')->getClientOriginalName(); 
-        $image = $request->file('image')->move('uploads/images', $imageUrl);
+        $imageUrl = 'uploads/candidates/'.$request->nickname.$request->file('image')->getClientOriginalName(); 
+        $image = $request->file('image')->move('uploads/candidates', $imageUrl);
         $newCandidate = ([
             'edition_id' => $edition->id,
             'fullname' => $request->fullname,
