@@ -64,11 +64,78 @@
                                     <i class="fas fa-ellipsis-v"></i>
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="#"><i class="fas fa-i-cursor"></i> Edit</a>
-                                    <a class="dropdown-item" href="#"><i class="fas fa-trash"></i> Remove</a>
+                                    <a class="dropdown-item" href="#"><i class="fas fa-eye"></i> View</a>
+                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#editEditionModal"><i class="fas fa-i-cursor"></i> Edit</a>
                                 </div>
                             </div>
                         </li>
+
+                        <div class="modal fade" tabindex="-1" role="dialog" id="editEditionModal">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Edit Edition</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="#333333" viewBox="0 0 24 24" width="24" height="24"><path d="M16.24 14.83a1 1 0 0 1-1.41 1.41L12 13.41l-2.83 2.83a1 1 0 0 1-1.41-1.41L10.59 12 7.76 9.17a1 1 0 0 1 1.41-1.41L12 10.59l2.83-2.83a1 1 0 0 1 1.41 1.41L13.41 12l2.83 2.83z"/></svg>
+                                        </button>
+                                    </div>
+                                    <form action="{{ route('editEdition') }}" method="post" enctype="multipart/form-data">
+                                        @csrf
+                                        <input type="hidden" name="edition_id" value="{{ $singleEdition->id}}">
+                                        <div class="modal-body">
+                                            <p class="text-center">Edit Edition</p>
+                                            <hr>
+                                            <div class="form-group">
+                                                <label for="">Edition Name</label>
+                                                <div class="input-group input-group-squared">
+                                                    <input type="text" name="name" class="form-control" value="{{ $singleEdition->name }}">
+                                                </div>
+                                            </div>
+                        
+                                            <div class="form-group">
+                                                <label for="">Edition Year</label>
+                                                <div class="input-group input-group-squared">
+                                                    <input type="number" min="1900" max="2099" step="1" name="year" value="{{ $singleEdition->year }}" class="form-control" >
+                                                </div>
+                                            </div>
+                        
+                                            <div class="form-group">
+                                                <label for="">Edition Tagline</label>
+                                                <div class="input-group input-group-squared">
+                                                    <input type="text" name="tagline" class="form-control" value="{{ $singleEdition->tagline }}">
+                                                </div>
+                                            </div>
+                        
+                                            <div class="form-group">
+                                                <label for="">Registration Amount</label>
+                                                <div class="input-group input-group-squared">
+                                                    <input type="text" name="registration_amount" class="form-control" value="{{ $singleEdition->registration_amount }}">
+                                                </div>
+                                            </div>
+                        
+                                            <div class="form-group">
+                                                <label for="">Amount Per Vote</label>
+                                                <div class="input-group input-group-squared">
+                                                    <input type="text" name="amount_per_vote" class="form-control" value="{{ $singleEdition->amount_per_vote }}">
+                                                </div>
+                                            </div>
+                        
+                                            <div class="form-group row">
+                                                <code class="col-md-12 pt-2">Maximum file size="3MB"</code>
+                                                <div class="col-md-12 mt-4">
+                                                    <input type="file" name="banner" class="dropify" data-max-file-size="3M"  data-allowed-file-extensions="jpg png" data-default-file="{{asset('img/placeholder.jpg')}}">
+                                                </div>
+                                            </div>
+                                        
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-light" data-dismiss="modal">No</button>
+                                            <button type="submit" class="btn btn-success">Save Changes</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                     @endforeach
                 </ul>
 
@@ -187,7 +254,7 @@
                     <div class="form-group">
                         <label for="">Stage</label>
                         <div class="input-group input-group-squared">
-                            <select name="stage" class="form-control">
+                            <select name="stage" required class="form-control">
                                 <option value="" selected="selected" >- Select Stage -</option>
                                 <option value='REGISTRATION'>REGISTRATION</option>
                                 <option value='AUDITION'>AUDITION</option>
@@ -232,7 +299,7 @@
                     <div class="form-group">
                         <label for="">Edition Year</label>
                         <div class="input-group input-group-squared">
-                            <input type="year" name="year" class="form-control">
+                            <input type="number" name="year" min="1900" max="2099" step="1" value="{{ $singleEdition->year }}" class="form-control">
                         </div>
                     </div>
 

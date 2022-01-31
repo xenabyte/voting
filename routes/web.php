@@ -39,4 +39,6 @@ Route::get('/paystackWebhook', [App\Http\Controllers\HomeController::class, 'pay
 Route::post('/createEdition', [App\Http\Controllers\HomeController::class, 'createEdition'])->name('createEdition');
 //activateEdition
 Route::get('/activateEdition/{id}', [App\Http\Controllers\HomeController::class, 'activateEdition'])->name('activateEdition');
+//editEdition
+Route::post('/editEdition', [App\Http\Controllers\HomeController::class, 'editEdition'])->name('editEdition');
 

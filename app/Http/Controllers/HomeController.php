@@ -231,4 +231,39 @@ class HomeController extends Controller
         alert()->error('Something went wrong', 'Opps')->persistent('Close'); 
         return redirect()->back();
     }
+
+
+    /**
+     * Edit Edition
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function editEdition(Request $request){
+        $editionId = $request->edition_id;
+
+        if(!$edition = Edition::find($editionId)){
+            alert()->error('Invalid Edition', 'Opps')->persistent('Close'); 
+            return redirect()->back();
+        }
+
+        $edition->name = $request->name;
+        $edition->year = $request->year;
+        $edition->tagline = $request->tagline;
+        $edition->registration_amount = $request->registration_amount;
+        $edition->amount_per_vote = $request->amount_per_vote;
+        if(!empty($request->banner)){
+            $imageUrl = 'uploads/banner/'.'banner_'.time().$request->file('banner')->getClientOriginalName(); 
+            $image = $request->file('banner')->move('uploads/banner', $imageUrl);
+            $edition->banner = $imageUrl;
+        }
+
+        if($edition->save()){
+            alert()->info('Changes Saved', 'Good Job')->persistent('Close'); 
+            return redirect()->back();
+        }
+
+        alert()->error('Something went wrong', 'Opps')->persistent('Close'); 
+        return redirect()->back();
+
+    }
 }

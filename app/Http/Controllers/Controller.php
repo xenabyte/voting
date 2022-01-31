@@ -100,6 +100,7 @@ class Controller extends BaseController
     public function makeEditionActive($id){
         $setting = Setting::first();
         $setting->edition_id = $id;
+        $setting->stage = Setting::STAGE_REGISTRATION;
        if($setting->save()){
             return true;
        }
