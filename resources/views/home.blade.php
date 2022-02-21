@@ -169,7 +169,7 @@
                     <div class="widget-content">
                         <div class="widget-header">
                             <h6 class="widget-title">Kiddies</h6>
-                            <div class="widget-stats counter">{{ $candidates->where('category', 'kiddies')->count() }}</div>
+                            <div class="widget-stats">{{ $candidates->where('category', 'kiddies')->count() }}</div>
                         </div>
 
                         <div class="widget-body">
@@ -193,7 +193,7 @@
                     <div class="widget-content">
                         <div class="widget-header">
                             <h6 class="widget-title">Adult</h6>
-                            <div class="widget-stats counter">{{ $candidates->where('category', 'adult')->count() }}</div>
+                            <div class="widget-stats">{{ $candidates->where('category', 'adult')->count() }}</div>
                         </div>
 
                         <div class="widget-body">
@@ -217,7 +217,7 @@
                     <div class="widget-content">
                         <div class="widget-header">
                             <h6 class="widget-title">Total Payments</h6>
-                            <div class="widget-stats counter">{{ number_format($payments->sum('amount', 2)) }}</div>
+                            <div class="widget-stats">{{ number_format($payments->sum('amount')) }}</div>
                         </div>
 
                         <div class="widget-body">

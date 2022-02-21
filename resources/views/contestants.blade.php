@@ -55,11 +55,11 @@
                                                 <i class="fas fa-ellipsis-v"></i>
                                             </button>
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButtonDefault">
-                                                <a href="#" class="dropdown-item" data-toggle="modal" data-target="#viewAdultCandidate">
+                                                <a href="#" class="dropdown-item" data-toggle="modal" data-target="#viewAdultCandidate-{{$contestant->id}}">
                                                     <i class="fas fa-eye"></i>
                                                     <span>View Contestant</span>
                                                 </a>
-                                                <a href="#" class="dropdown-item" data-toggle="modal" data-target="#disqualifyAdultContestant">
+                                                <a href="#" class="dropdown-item" data-toggle="modal" data-target="#disqualifyAdultContestant-{{$contestant->id}}">
                                                     <i class="fas fa-times text-danger"></i>
                                                     <span>Disqualify Contestant</span>
                                                 </a>
@@ -84,7 +84,7 @@
                                 </div>
                             </div>
 
-                            <div class="modal fade" tabindex="-1" role="dialog" id="disqualifyAdultContestant">
+                            <div class="modal fade" tabindex="-1" role="dialog" id="disqualifyAdultContestant-{{$contestant->id}}">
                                 <div class="modal-dialog modal-dialog-centered modal-confirm confirm-danger">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -112,7 +112,7 @@
                                 </div>
                             </div>
 
-                            <div class="modal fade" tabindex="-1" role="dialog" id="viewAdultCandidate">
+                            <div class="modal fade" tabindex="-1" role="dialog" id="viewAdultCandidate-{{$contestant->id}}">
                                 <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -176,11 +176,11 @@
                                             <i class="fas fa-ellipsis-v"></i>
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButtonDefault">
-                                            <a href="#" class="dropdown-item" data-toggle="modal" data-target="#viewContestant">
+                                            <a href="#" class="dropdown-item" data-toggle="modal" data-target="#viewContestant-{{$kidContestant->id}}">
                                                 <i class="fas fa-eye"></i>
                                                 <span>View Contestant</span>
                                             </a>
-                                            <a href="#" class="dropdown-item" data-toggle="modal" data-target="#disqualifyContestant">
+                                            <a href="#" class="dropdown-item" data-toggle="modal" data-target="#disqualifyContestant-{{$kidContestant->id}}">
                                                 <i class="fas fa-times text-danger"></i>
                                                 <span>Disqualify Contestant</span>
                                             </a>
@@ -205,7 +205,7 @@
                             </div>
                         </div>
 
-                        <div class="modal fade" tabindex="-1" role="dialog" id="disqualifyContestant">
+                        <div class="modal fade" tabindex="-1" role="dialog" id="disqualifyContestant-{{$kidContestant->id}}">
                             <div class="modal-dialog modal-dialog-centered modal-confirm confirm-danger">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -234,7 +234,7 @@
                         </div>
 
 
-                        <div class="modal fade" tabindex="-1" role="dialog" id="viewContestant">
+                        <div class="modal fade" tabindex="-1" role="dialog" id="viewContestant-{{$kidContestant->id}}">
                             <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">

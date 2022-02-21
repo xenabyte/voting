@@ -76,7 +76,7 @@ class HomeController extends Controller
     {
         return view('editions');
     }
-
+    
    /**
      * Show the Edition candidates.
      *
@@ -284,7 +284,7 @@ class HomeController extends Controller
         $imageUrl = 'uploads/contestant/'.'contestant'.time().$request->file('image')->getClientOriginalName(); 
         $image = $request->file('image')->move('uploads/contestant', $imageUrl);
         $newContestant = ([
-            'candidate_id' => $request->candidate_id,
+            'candidate_id' => $request->candidate_id,   
             'edition_id' => $request->edition_id,
             'status' => 1,
             'image' => $imageUrl,

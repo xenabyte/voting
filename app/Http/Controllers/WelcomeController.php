@@ -99,6 +99,17 @@ class WelcomeController extends Controller
             'occupation'=> $request->occupation,
             'image' => $imageUrl
         ]);
+
+        // $alreadyPaid = array('07054143144', '07037078046', '07063196058', '08156892988', '08089402623', '07012662549', '09068851250', '08128641320');
+
+        // foreach($alreadyPaid as $paid){
+        //     if($request->number == $paid){
+        //         if($createCandidate = Candidate::create($newCandidate)){
+        //             alert()->info('Registration successful', 'Good Job')->persistent('Close');
+        //             return $this->viewLanding($category);
+        //         }
+        //     }
+        // }
         
         return view('welcome', [
             'category' => $category,

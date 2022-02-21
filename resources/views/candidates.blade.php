@@ -49,11 +49,11 @@
                                             <i class="fas fa-ellipsis-v"></i>
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButtonDefault">
-                                            <a href="#" class="dropdown-item" data-toggle="modal" data-target="#viewAdultCandidate">
+                                            <a href="#" class="dropdown-item" data-toggle="modal" data-target="#viewAdultCandidate-{{$candidate->id}}">
                                                 <i class="fas fa-eye"></i>
                                                 <span>View Candidate</span>
                                             </a>
-                                            <a href="#" class="dropdown-item" data-toggle="modal" data-target="#makeAdultContestant">
+                                            <a href="#" class="dropdown-item" data-toggle="modal" data-target="#makeAdultContestant-{{$candidate->id}}">
                                                 <i class="fas fa-check text-success"></i>
                                                 <span>Make Contestant</span>
                                             </a>
@@ -78,7 +78,7 @@
                             </div>
                         </div>
 
-                        <div class="modal fade" tabindex="-1" role="dialog" id="makeAdultContestant">
+                        <div class="modal fade" tabindex="-1" role="dialog" id="makeAdultContestant-{{$candidate->id}}">
                             <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -132,7 +132,7 @@
                             </div>
                         </div>
 
-                        <div class="modal fade" tabindex="-1" role="dialog" id="viewAdultCandidate">
+                        <div class="modal fade" tabindex="-1" role="dialog" id="viewAdultCandidate-{{$candidate->id}}">
                             <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -198,11 +198,11 @@
 												<i class="fas fa-ellipsis-v"></i>
 											</button>
 											<div class="dropdown-menu" aria-labelledby="dropdownMenuButtonDefault">
-												<a href="#" class="dropdown-item" data-toggle="modal" data-target="#viewCandidate">
+												<a href="#" class="dropdown-item" data-toggle="modal" data-target="#viewCandidate-{{$kidCandidate->id}}">
 													<i class="fas fa-eye"></i>
 													<span>View Candidate</span>
 												</a>
-												<a href="#" class="dropdown-item" data-toggle="modal" data-target="#makeContestant">
+												<a href="#" class="dropdown-item" data-toggle="modal" data-target="#makeContestant-{{$kidCandidate->id}}">
 													<i class="fas fa-check text-success"></i>
 													<span>Make Contestant</span>
 												</a>
@@ -227,7 +227,7 @@
 								</div>
 							</div>
 
-                            <div class="modal fade" tabindex="-1" role="dialog" id="makeContestant">
+                            <div class="modal fade" tabindex="-1" role="dialog" id="makeContestant-{{$kidCandidate->id}}">
                                 <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -282,7 +282,7 @@
                             </div>
 
 
-                            <div class="modal fade" tabindex="-1" role="dialog" id="viewCandidate">
+                            <div class="modal fade" tabindex="-1" role="dialog" id="viewCandidate-{{$kidCandidate->id}}">
                                 <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
