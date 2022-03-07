@@ -55,12 +55,19 @@
 						<div class="panel-body panel-error">
 
 							<div>
-								<h1 style="font-size: 45px" class="error-code text-danger">The wait is finally over</h1>
-								<h2 class="error-title">Shush! Let's get started</h2>
+								<h1 style="font-size: 45px" class="error-code text-danger">Hearing the vibe in you</h1>
+								<h2 class="error-title">Shush! it's {{$setting->stage}} STAGE, let's Ride</h2>
                                 
+								@if($setting->stage == 'REGISTRATION')
 								<a href="{{ url('/registration/kiddies') }}" class="btn btn-info">Kiddies Registration</a>
 
                                 <a href="{{ url('/registration/adult') }}" class="btn btn-warning">Adult Registration</a>
+								@elseif($setting->stage == 'AUDITION')
+
+								<a href="{{ url('/audition/kiddies') }}" class="btn btn-info">Kiddies Contestant</a>
+
+                                <a href="{{ url('/audition/adult') }}" class="btn btn-warning">Adult Contestant</a>
+								@endif
 							</div>
 	
 						</div>

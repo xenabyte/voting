@@ -18,7 +18,7 @@ Auth::routes([
 ]);
 
 Route::get('/', [App\Http\Controllers\WelcomeController::class, 'index'])->name('index');
-
+Route::get('/audition/{category}', [App\Http\Controllers\WelcomeController::class, 'audition'])->name('audition');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/registration/{category}', [App\Http\Controllers\WelcomeController::class, 'registration'])->name('registration');

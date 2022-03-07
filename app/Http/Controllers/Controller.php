@@ -31,6 +31,9 @@ class Controller extends BaseController
         $setting = Setting::first();
         $edition = $setting->edition;
 
+        //contestants
+        $contestants = Contestant::with('candidate', 'edition')->where('edition_id', $edition->id)->get();
+
         switch ($setting->stage){
             case Setting::STAGE_REGISTRATION:
                 return view('welcome', [
@@ -38,6 +41,12 @@ class Controller extends BaseController
                     'edition' => $edition,
                 ]);
                 break;
+            case Setting::STAGE_AUDITION:
+                return view('audition', [
+                    'category' => $category,
+                    'edition' => $edition,
+                    'contestants' => $contestants
+                ]);
             default:
                 return view('welcome', [
                     'category' => $category,

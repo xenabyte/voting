@@ -35,7 +35,14 @@ class WelcomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index(){
-        return view('index');
+
+        $setting = Setting::first();
+        $edition = $setting->edition;
+
+        return view('index', [
+            'edition' => $edition,
+            'setting' => $setting
+        ]);
     }
 
      /**
@@ -44,6 +51,20 @@ class WelcomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function registration($category){
+        if($category != 'kiddies' && $category != 'adult'){
+            return view('error');
+        }
+
+        return $this->viewLanding($category);
+    }
+    
+
+     /**
+     * Show audition page
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function audition($category){
         if($category != 'kiddies' && $category != 'adult'){
             return view('error');
         }
@@ -80,6 +101,7 @@ class WelcomeController extends Controller
         $imageUrl = 'uploads/candidates/'.$request->nickname.$request->file('image')->getClientOriginalName(); 
         $image = $request->file('image')->move('uploads/candidates', $imageUrl);
         $newCandidate = ([
+            'category' => $category,
             'edition_id' => $edition->id,
             'fullname' => $request->fullname,
             'nickname' => $request->nickname,
@@ -99,17 +121,46 @@ class WelcomeController extends Controller
             'occupation'=> $request->occupation,
             'image' => $imageUrl
         ]);
+        
+        $alreadyPaid = array(
+            '07054143144', 
+            '07037078046', 
+            '07063196058', 
+            '08156892988', 
+            '08089402623', 
+            '07012662549', 
+            '09068851250', 
+            '08128641320', 
+            '09035163592', 
+            '09130155553', 
+            '08156892988', 
+            '08148279075', 
+            '08144017042', 
+            '09123955390', 
+            '09051966572', 
+            '09160577877', 
+            '07026501977', 
+            '07051288103', 
+            '08065295338', 
+            '07081752298', 
+            '07040861262', 
+            '09060743840', 
+            '08168751755', 
+            '08100095181', 
+            '08064430011',
+            '08105752847'
+        );
+        $phoneNumber = $category == 'kiddies' ? $request->guardian_phone_number : $request->phone_number;
 
-        // $alreadyPaid = array('07054143144', '07037078046', '07063196058', '08156892988', '08089402623', '07012662549', '09068851250', '08128641320');
-
-        // foreach($alreadyPaid as $paid){
-        //     if($request->number == $paid){
-        //         if($createCandidate = Candidate::create($newCandidate)){
-        //             alert()->info('Registration successful', 'Good Job')->persistent('Close');
-        //             return $this->viewLanding($category);
-        //         }
-        //     }
-        // }
+        foreach($alreadyPaid as $paid){
+            if($phoneNumber == $paid){
+                if($createCandidate = Candidate::create($newCandidate)){
+                    alert()->info('Registration successful', 'Good Job')->persistent('Close');
+                    return $this->viewLanding($category);
+                }
+            }
+        }
+        
         
         return view('welcome', [
             'category' => $category,
